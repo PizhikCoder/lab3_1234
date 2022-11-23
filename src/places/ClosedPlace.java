@@ -9,7 +9,7 @@ public class ClosedPlace extends Place{
         isDoorOpened = false;
     }
     public ClosedPlace(String name, TimeOfDay time, Furniture... entities) {
-        super(name, PlaceType.CLOSED, time,entities);
+        super(name, time,entities);
     }
     public Boolean getDoorStatus(){
         return isDoorOpened;

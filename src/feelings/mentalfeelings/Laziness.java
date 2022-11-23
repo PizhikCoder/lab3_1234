@@ -13,8 +13,5 @@ public class Laziness extends Feeling {
         if (person.canFeel(new Laziness())){
             System.out.println(person.getName() + " ленится " + about);
         }
-        else{
-            System.out.println(person.getName() + " не может лениться.");
-        }
     }
 }

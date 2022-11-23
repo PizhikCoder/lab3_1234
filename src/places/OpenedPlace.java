@@ -6,7 +6,7 @@ import entities.Furniture;
 public class OpenedPlace extends Place{
     private WeatherType weather;
     public OpenedPlace(String name, TimeOfDay time, WeatherType weather, Furniture... entities) {
-        super(name, PlaceType.OPENED, time, entities);
+        super(name, time, entities);
         this.weather = weather;
     }
     public WeatherType getWeather(){
