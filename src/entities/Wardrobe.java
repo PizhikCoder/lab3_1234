@@ -1,23 +1,22 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import characters.Person;
 import interfaces.ICleanable;
 import interfaces.IContainable;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class BedsideTable extends Furniture implements ICleanable, IContainable {
+public class Wardrobe extends Furniture implements ICleanable, IContainable {
     private List<SmallThing> things;
 
-    public BedsideTable(String name, SmallThing... things) {
+    public Wardrobe(String name, SmallThing... things) {
         super(name);
         this.things = things == null ? new ArrayList<SmallThing>() : new ArrayList<>(List.of(things));
     }
 
     @Override
-    public void clean(Person person) {
-        System.out.println(person.getName() + " протер " + getName());
+    public void clean(Person person){
+        System.out.println(person.getName() + " протер влажной тряпочкой " + getName());
     }
 
     @Override

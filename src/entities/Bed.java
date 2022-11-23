@@ -1,12 +1,10 @@
 package entities;
 
 import characters.Person;
-import com.sun.security.jgss.GSSUtil;
 import interfaces.ICleanable;
 import interfaces.IWallowable;
-import places.Place;
 
-public class Bed extends Entity implements ICleanable, IWallowable {
+public class Bed extends Furniture implements ICleanable, IWallowable {
     public Bed(String name)
     {
         super(name);
@@ -15,6 +13,11 @@ public class Bed extends Entity implements ICleanable, IWallowable {
     {
         System.out.println(person.getName() + " встал с " + getName());
     }
+    public void lieDown(Person person)
+    {
+        System.out.println(person.getName() + " лег на " + getName());
+    }
+
     @Override
     public void wallow(Person person)
     {

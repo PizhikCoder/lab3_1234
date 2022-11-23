@@ -3,17 +3,16 @@ package entities;
 import characters.Person;
 import interfaces.ICleanable;
 import interfaces.IContainable;
-import places.Place;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Windowsill extends Entity implements ICleanable, IContainable {
-    private List<Entity> entities;
+public class Windowsill extends Furniture implements ICleanable, IContainable {
+    private List<SmallThing> things;
 
-    public Windowsill(String name, Entity ... entities) {
+    public Windowsill(String name, SmallThing... things) {
         super(name);
-        this.entities = entities == null ? new ArrayList<Entity>() : new ArrayList<>(List.of(entities));
+        this.things = things == null ? new ArrayList<SmallThing>() : new ArrayList<>(List.of(things));
     }
 
     @Override
@@ -22,14 +21,14 @@ public class Windowsill extends Entity implements ICleanable, IContainable {
     }
 
     @Override
-    public List<Entity> getEntities(){
-        return entities;
+    public List<SmallThing> getThings(){
+        return things;
     }
 
     @Override
-    public Boolean containEntity(Entity entity) {
-        for(Entity i: entities){
-            if(i.equals(entity)){
+    public Boolean containThing(SmallThing thing) {
+        for(SmallThing i: things){
+            if(i.equals(thing)){
                 return true;
             }
         }
@@ -37,38 +36,38 @@ public class Windowsill extends Entity implements ICleanable, IContainable {
     }
 
     @Override
-    public void removeEntity(Person person, Entity entity){
-        if(containEntity(entity)){
-            entities.remove(entity);
-            System.out.printf("%s убрал %s с %s\n", person.getName(), entity.getName(), getName());
+    public void removeThing(Person person, SmallThing thing){
+        if(containThing(thing)){
+            things.remove(thing);
+            System.out.printf("%s убрал %s с %s\n", person.getName(), thing.getName(), getName());
         }
     }
 
     @Override
-    public void addEntity(Person person, Entity entity) {
-        if (!containEntity(entity)){
-            entities.add(entity);
-            System.out.printf("%s положил %s на %s\n", person.getName(), entity.getName(), getName());
+    public void addThing(Person person, SmallThing thing) {
+        if (!containThing(thing)){
+            things.add(thing);
+            System.out.printf("%s положил %s на %s\n", person.getName(), thing.getName(), getName());
         }
     }
 
     @Override
-    public void shiftEntities(Person person, IContainable to, Entity ... entities) {
-        if (entities != null){
-            for(Entity entity:entities){
-                removeEntity(person, entity);
-                to.addEntity(person, entity);
+    public void shiftThings(Person person, IContainable to, SmallThing... things) {
+        if (things != null){
+            for(SmallThing thing : things){
+                removeThing(person, thing);
+                to.addThing(person, thing);
             }
         }
     }
 
 
     @Override
-    public void shiftEntities(Person person, IContainable to, List<Entity> entities) {
-        if (entities != null){
-            for(Entity entity:entities){
-                removeEntity(person, entity);
-                to.addEntity(person, entity);
+    public void shiftThings(Person person, IContainable to, List<SmallThing> things) {
+        if (things != null){
+            for(SmallThing thing : things){
+                removeThing(person, thing);
+                to.addThing(person, thing);
             }
         }
     }

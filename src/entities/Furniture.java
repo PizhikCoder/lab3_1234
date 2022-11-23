@@ -1,13 +1,12 @@
 package entities;
 
-import feelings.Feeling;
 import places.Place;
 
-public abstract class Entity {
+public class Furniture {
     private String name;
     private Place place;
 
-    public Entity(String name){
+    public Furniture(String name){
         this.name = name;
     }
 
@@ -37,7 +36,7 @@ public abstract class Entity {
         if (getClass() != otherObject.getClass()){
             return false;
         }
-        Entity obj = (Entity) otherObject;
+        Furniture obj = (Furniture) otherObject;
         return (obj).name == name && place.equals(obj.place);
     }
 }

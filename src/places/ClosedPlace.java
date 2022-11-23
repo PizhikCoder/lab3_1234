@@ -1,12 +1,30 @@
 package places;
 
 import characters.Person;
-import entities.Entity;
+import entities.Furniture;
 
 public class ClosedPlace extends Place{
-
-    public ClosedPlace(String name, TimeOfDay time, Entity... entities) {
+    private Boolean isDoorOpened;
+    {
+        isDoorOpened = false;
+    }
+    public ClosedPlace(String name, TimeOfDay time, Furniture... entities) {
         super(name, PlaceType.CLOSED, time,entities);
+    }
+    public Boolean getDoorStatus(){
+        return isDoorOpened;
+    }
+    public void closeTheDoor(Person person) {
+        if (isDoorOpened) {
+            System.out.println(person.getName() + " закрыл дверь в " + getName());
+            isDoorOpened = false;
+        }
+    }
+    public void openTheDoor(Person person){
+        if(!isDoorOpened) {
+            System.out.println(person.getName() + " открыл дверь в " + getName() );
+            isDoorOpened = true;
+        }
     }
 
     @Override

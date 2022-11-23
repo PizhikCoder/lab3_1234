@@ -1,9 +1,11 @@
 package characters;
 
+import entities.Furniture;
 import feelings.Feeling;
-import feelings.mentalfeelings.Mood;
+import feelings.MoodLevels;
 import interfaces.ICurable;
 import interfaces.IWallowable;
+import places.Place;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +13,26 @@ import java.util.List;
 public abstract class Person {
     private String name;
     private List<Feeling> feelings;
+    private MoodLevels moodLevel;
+    private Boolean isSleep;
 
     public Person(String name, Feeling ... feelings){
         this.name = name;
+        isSleep = false;
+        moodLevel = MoodLevels.NORMAL;
         if (feelings == null){
             this.feelings = new ArrayList<>();
-            this.addFeeling(new Mood());
         }
         else{
             this.feelings = new ArrayList<>(List.of(feelings));
-            this.feelings.add(new Mood());
         }
+    }
+    public void setMood(MoodLevels moodLevel){
+        this.moodLevel = moodLevel;
+        System.out.printf("у %s настроение сменилось на %s\n", getName(), moodLevel);
+    }
+    public MoodLevels getMood(){
+        return moodLevel;
     }
 
     public String getName() {
@@ -37,10 +48,12 @@ public abstract class Person {
 
     public void wakeUp(){
         System.out.println(getName() + " проснулся.");
+        isSleep = false;
     }
 
     public void sleep(){
         System.out.println(getName() + " заснул.");
+        isSleep = true;
     }
 
     public Boolean canFeel(Feeling feeling){
@@ -82,5 +95,21 @@ public abstract class Person {
 
     public void washUp(){
         System.out.println(getName() + " умылся.");
+    }
+    public void go(Place from, Place to){
+        System.out.println(getName() + " ушел из " + from.getName() + " в " + to.getName());
+    }
+    public boolean equals(Object otherObject) {
+        if(this == otherObject){
+            return true;
+        }
+        if (otherObject == null){
+            return false;
+        }
+        if (getClass() != otherObject.getClass()){
+            return false;
+        }
+        Furniture obj = (Furniture) otherObject;
+        return (obj).getName() == name;
     }
 }
