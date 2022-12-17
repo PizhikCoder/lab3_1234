@@ -4,17 +4,22 @@ import entities.Furniture;
 import feelings.Feeling;
 import feelings.MoodLevels;
 import interfaces.ICurable;
+import interfaces.ICanMove;
 import interfaces.IWallowable;
 import places.Place;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Person {
+public abstract class Person implements ICanMove {
     private String name;
     private List<Feeling> feelings;
     private MoodLevels moodLevel;
+    private Boolean isBandOver = false;
     private Boolean isSleep;
+    private Boolean isFlying = false;
+    private Boolean isLying = false;
+    private Boolean isHanging = false;
 
     public Person(String name, Feeling ... feelings){
         this.name = name;
@@ -80,6 +85,12 @@ public abstract class Person {
         }
         return null;
     }
+    public void setIsBandOver(Boolean isBandOver){
+        this.isBandOver = isBandOver;
+    }
+    public Boolean getIsBandOver(){
+        return isBandOver;
+    }
 
     public void treat(ICurable iCurable){
         iCurable.cure(this);
@@ -91,6 +102,36 @@ public abstract class Person {
 
     public void doExercises(){
         System.out.println(getName() + " сделал утреннюю зарядку.");
+    }
+
+    @Override
+    public Boolean getIsFlying() {
+        return isFlying;
+    }
+
+    @Override
+    public Boolean getIsHanging() {
+        return isHanging;
+    }
+
+    @Override
+    public Boolean getIsLying() {
+        return isLying;
+    }
+
+    @Override
+    public void setIsFlying(Boolean isFlying) {
+        this.isFlying = isFlying;
+    }
+
+    @Override
+    public void setIsLying(Boolean isLying) {
+        this.isLying = isLying;
+    }
+
+    @Override
+    public void setIsHanging(Boolean isHanging) {
+        this.isHanging = isHanging;
     }
 
     public void washUp(){
